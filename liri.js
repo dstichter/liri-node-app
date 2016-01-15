@@ -1,5 +1,6 @@
-var twitterKeys = require("./keys.js");
+var twitterKeys = require('./keys.js');
 var spotify = require('spotify');
+var fs = require('fs');
 
 var params = process.argv.slice(2);
 
@@ -8,7 +9,12 @@ switch(params[0]) {
     twitterCall(params[1]);
     break;
   case "spotify-this-song":
-    spotifyCall(params[1]);
+    if(params[1]){
+      spotifyCall(params[1]);
+    }
+    else{
+      spotifyCall("what’s my age again")
+    }
     break;
   case "movie_this":
     omdbCall(params[1]);
@@ -24,6 +30,12 @@ function spotifyCall (arg) {
         console.log('Error occurred: ' + err);
         return;
     }
+    var albumInfo = data.tracks.items[0]
+    console.log("Artist: " + albumInfo.artists[0].name)
+    console.log("Album Name: " + albumInfo.album.name)
+    console.log("Song Name: " + albumInfo.name)
+    console.log("Preview: " + albumInfo.album.external_urls.spotify)
+  });
 }
 
 function twitterCall (arg) {
