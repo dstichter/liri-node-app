@@ -32,6 +32,7 @@ function switchFunction (arg1, arg2) {
       break;
     default:
       console.log("my-tweets" + "\r\n" + "spotify-this-song" + "\r\n" + "movie-this" + "\r\n" + "do-what-it-says")
+      logIt("\r\n" + "my-tweets" + "\r\n" + "spotify-this-song" + "\r\n" + "movie-this" + "\r\n" + "do-what-it-says")
 
   }
 }
@@ -96,7 +97,10 @@ function doWhatItSays () {
 }
 
 function logIt (data) {
-  var output = params[0] + "\r\n";
+  var output = "";
+  if(params[0]){
+    output += params[0] + "\r\n";
+  }
   if(params[1]){
     output +=  params[1] + "\r\n";
   }
