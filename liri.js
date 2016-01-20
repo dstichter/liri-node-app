@@ -3,6 +3,8 @@ var spotify = require('spotify');
 var fs = require('fs');
 var request = require('request');
 var twitter = require('twitter');
+var prompt = require('prompt');
+var openurl = require('openurl')
 
 var rtKey = "nw8987u6xrradkrzuyjjdnmg"; 
 
@@ -49,6 +51,16 @@ function spotifyCall (arg) {
     "Song Name: " + albumInfo.name + "\r\n" + 
     "Preview: " + albumInfo.album.external_urls.spotify + "\r\n";
     console.log(output);
+    prompt.start();
+    prompt.get(['Play_Song'], function (err, result) {
+      if(err){
+        console.log(err);
+      }
+      if(result.Play_Song === "yes" || result.Play_Song === "y" ){
+        openurl.open(albumInfo.album.external_urls.spotify);
+      }
+
+    });
     logIt(output);
   });
 }
